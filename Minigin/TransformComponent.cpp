@@ -5,12 +5,12 @@
 dae::TransformComponent::TransformComponent(GameObject* obj)
 	:BaseComponent(obj) {}
 
-const glm::vec3& dae::TransformComponent::GetLocalPosition() const
+const Vector3& dae::TransformComponent::GetLocalPosition() const
 {
 	return m_LocalPosition;
 }
 
-const glm::vec3& dae::TransformComponent::GetWorldPosition()
+const Vector3& dae::TransformComponent::GetWorldPosition()
 {
 
 	if (m_IsDirty)
@@ -32,7 +32,7 @@ void dae::TransformComponent::SetLocalPosition(const float x, const float y, con
 	SetDirty();
 }
 
-void dae::TransformComponent::SetLocalPosition(const glm::vec3& pos)
+void dae::TransformComponent::SetLocalPosition(const Vector3& pos)
 {
 	SetLocalPosition(pos.x, pos.y, pos.z);
 }
@@ -48,7 +48,9 @@ void dae::TransformComponent::UpdateWorldPosition()
 	else
 	{
 		auto parentPos = owner->GetParent()->GetTransform()->GetWorldPosition();
-		m_WorldPosition = parentPos + m_LocalPosition;
+		m_WorldPosition.x = parentPos.x + m_LocalPosition.x;
+		m_WorldPosition.y = parentPos.y + m_LocalPosition.y;
+		m_WorldPosition.z = parentPos.z + m_LocalPosition.z;
 		if (m_WorldPosition.x > 600)
 		{
 			m_WorldPosition = m_WorldPosition;

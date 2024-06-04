@@ -25,7 +25,8 @@ enum class Tag
 	patty,
 	tomato,
 	peterjr,
-	playerhotdog
+	playerhotdog,
+	wall
 };
 #pragma endregion
 #pragma region STATE

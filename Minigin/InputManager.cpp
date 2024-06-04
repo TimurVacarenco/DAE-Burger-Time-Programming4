@@ -3,7 +3,6 @@
 #include <SDL_events.h>
 
 #include "ServiceLocator.h"
-#include "../BurgerTime/GameInstance.h"
 
 dae::InputManager::InputManager()
 {
@@ -45,7 +44,6 @@ bool dae::InputManager::HandleInput()
 			}
 			if (e.key.keysym.scancode == SDL_SCANCODE_F1)
 			{
-				GameInstance::GetInstance().SkipLevel();
 			}
 		}
 	}

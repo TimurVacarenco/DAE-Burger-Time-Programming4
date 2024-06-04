@@ -13,6 +13,7 @@ namespace dae {
         int GetLives() { return m_Lives; }
         void SetLives(int lives) { m_Lives = lives; }
         void Hit(int amt = 1);
+        void Kill();
     private:
         int m_Lives = 3;
     };

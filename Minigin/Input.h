@@ -1,11 +1,12 @@
 #pragma once
 #include <map>
 #include <memory>
-#include <SDL_scancode.h>
 #include <vector>
+#include "..\3rdParty\SDL2\include\SDL_scancode.h"
 #include "PlayerController.h"
 #include "BaseCommand.h"
 #include "EnumClasses.h"
+
 
 class Input final
 {

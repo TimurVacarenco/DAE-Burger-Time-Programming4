@@ -1,8 +1,7 @@
 #pragma once
-#include <glm/glm.hpp>
 
 #include "BaseComponent.h"
-
+#include "Structs.h"
 namespace dae
 {
 	class TransformComponent : public BaseComponent
@@ -10,11 +9,11 @@ namespace dae
 	public:
 		TransformComponent(GameObject* obj);
 
-		const glm::vec3& GetLocalPosition() const;
-		const glm::vec3& GetWorldPosition();
+		const Vector3& GetLocalPosition() const;
+		const Vector3& GetWorldPosition();
 
 		void SetLocalPosition(float x, float y, float z);
-		void SetLocalPosition(const glm::vec3& pos);
+		void SetLocalPosition(const Vector3& pos);
 		void SetDirty();
 
 		void Update(float) override {};
@@ -22,8 +21,8 @@ namespace dae
 	private:
 		void UpdateWorldPosition();
 
-		glm::vec3 m_LocalPosition{};
-		glm::vec3 m_WorldPosition{};
+		Vector3 m_LocalPosition{};
+		Vector3 m_WorldPosition{};
 		bool m_IsDirty = false;
 	};
 }

@@ -24,31 +24,52 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="GameInstance.h">
-      <Filter>Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelLoader.h">
-      <Filter>Misc</Filter>
-    </ClInclude>
     <ClInclude Include="PepperComponent.h">
       <Filter>GameComponents</Filter>
     </ClInclude>
+    <ClInclude Include="PeterPepper.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Ladder.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="PepperComponent.cpp">
+      <Filter>GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="PeterPepper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
-    <ClCompile Include="GameInstance.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
-    <ClCompile Include="LevelLoader.cpp">
-      <Filter>Misc</Filter>
+    <ClCompile Include="Ladder.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PepperComponent.cpp">
-      <Filter>GameComponents</Filter>
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

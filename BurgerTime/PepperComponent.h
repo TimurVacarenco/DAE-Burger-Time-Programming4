@@ -1,29 +1,18 @@
 #pragma once
-#include "RenderComponent.h"
-#include "Subject.h"
+#include "BaseComponent.h"
+#include "TransformComponent.h"
+#include "EnumClasses.h"
 
 namespace dae {
-	class GameObject;
-
-	class PepperComponent : public BaseComponent, public Subject
-	{
-	public:
-		PepperComponent(GameObject* owner);
-		void Update(float)override;
-		void FixedUpdate(float) override {}
-		void Activate();
-		int GetAmt()const { return m_Amt; }
-	private:
-		void Initialize();
-
-		GameObject* m_Peter{};
-		dae::RenderComponent* m_RenderComp{};
-		bool m_Active{ false };
-
-		float m_TimeToShow{ .5f };
-		float m_ElapsedTime{};
-
-		int m_Amt{ 5 };
-		int m_Sound{};
-	};
+    class PepperComponent : public BaseComponent
+    {
+    public:
+        PepperComponent(GameObject* owner);
+        void Update(float deltaTime) override;
+        void FixedUpdate(float) override {}
+        void SetState(CharacterState state) { m_State = state; }
+    private:
+        CharacterState m_State = CharacterState::idle;
+        float m_Speed = 30.f;
+    };
 }
