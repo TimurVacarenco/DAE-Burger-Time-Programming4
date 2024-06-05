@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "Input.h"
 #include "Scene.h"
+#include "PlatformComponent.h"
 
 dae::Platform::Platform(dae::Scene& scene, Vector2 loc)
 {
@@ -19,11 +20,15 @@ void dae::Platform::Initialize(dae::Scene& scene, Vector2 loc)
 	rc->SetDimensions(64, 64);
 
 	auto col = go->AddComponent<CollisionComponent>();
-	col->SetSize(64, 5);
-	col->SetOffset(0, 59);
+	col->SetSize(64, 10);
+	col->SetOffset(0, 58);
+
+	go->AddComponent<PlatformComponent>();
+
 	go->GetTransform()->SetLocalPosition(loc.x, loc.y, 0);
 
+
 	go->SetTag(Tag::platform);
-	scene.Add(go);
+	scene.Add(go, 1);
 
 }

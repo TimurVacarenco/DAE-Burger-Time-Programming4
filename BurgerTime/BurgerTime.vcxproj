@@ -135,22 +135,40 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BottomBun.h" />
+    <ClInclude Include="Cheese.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="IngredientComponent.h" />
     <ClInclude Include="Ladder.h" />
+    <ClInclude Include="Lettuce.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="Patty.h" />
     <ClInclude Include="PepperComponent.h" />
     <ClInclude Include="PeterPepper.h" />
+    <ClInclude Include="Plate.h" />
     <ClInclude Include="Platform.h" />
+    <ClInclude Include="PlatformComponent.h" />
+    <ClInclude Include="Tomato.h" />
+    <ClInclude Include="TopBun.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BottomBun.cpp" />
+    <ClCompile Include="Cheese.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="IngredientComponent.cpp" />
     <ClCompile Include="Ladder.cpp" />
+    <ClCompile Include="Lettuce.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Patty.cpp" />
     <ClCompile Include="PepperComponent.cpp" />
     <ClCompile Include="PeterPepper.cpp" />
+    <ClCompile Include="Plate.cpp" />
     <ClCompile Include="Platform.cpp" />
+    <ClCompile Include="PlatformComponent.cpp" />
+    <ClCompile Include="Tomato.cpp" />
+    <ClCompile Include="TopBun.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

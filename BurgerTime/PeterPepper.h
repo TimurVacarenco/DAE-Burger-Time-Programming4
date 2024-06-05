@@ -17,6 +17,7 @@ namespace dae
 		PeterPepper& operator=(PeterPepper&& other) noexcept = delete;
 	private:
 		void Initialize(dae::Scene& scene);
-		std::shared_ptr<dae::TransformComponent> m_Transform{};
+		float m_Height{62};
+		float m_Width{64};
 	};
 }

@@ -17,7 +17,7 @@ enum class Tag
 	hotdog,
 	pickle,
 	egg,
-	bun,
+	topbun,
 	plate,
 	cheese,
 	bottombun,
@@ -40,7 +40,7 @@ enum class EnemyState
 	falling,
 	dead
 };
-enum class IngridientState
+enum class IngredientState
 {
 	idle,
 	falling,

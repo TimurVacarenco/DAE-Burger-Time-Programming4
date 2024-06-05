@@ -5,7 +5,7 @@
 
 bool dae::CollisionComponent::IsOverlapping(GameObject* other)
 {
-	if (GetOwner() == other)
+	if (GetOwner() == nullptr || GetOwner() == other )
 		return false;
 
 	if (auto otherCol = other->GetComponent<CollisionComponent>())

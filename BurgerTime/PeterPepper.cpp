@@ -6,6 +6,7 @@
 #include "InputManager.h"
 #include "Scene.h"
 #include "ServiceLocator.h"
+#include <AnimationRenderComponent.h>
 
 dae::PeterPepper::PeterPepper(dae::Scene& scene)
 {
@@ -15,11 +16,20 @@ dae::PeterPepper::PeterPepper(dae::Scene& scene)
 void dae::PeterPepper::Initialize(dae::Scene& scene)
 {
 	auto go = std::make_shared<dae::GameObject>();
-	auto rc = go->AddComponent<dae::RenderComponent>();
-	go->AddComponent<PepperComponent>();
-	rc->SetTexture("\\Sprites\\PeterPepper\\peter.png");
+	auto ppcomp = go->AddComponent<PepperComponent>();
 
-	scene.Add(go);
+
+	auto rc = go->AddComponent<dae::AnimationRenderComponent>();
+	rc->SetTexture("\\Sprites\\PeterPepper\\sprites.png");
+	rc->SetDimensions(m_Height, m_Width);
+	rc->SetSpriteDimensions(16, 16);
+	ppcomp->InitAnimation(rc);
+
+	auto col = go->AddComponent<CollisionComponent>();
+	col->SetSize(64, 64);
+	go->SetTag(Tag::peter);
+	scene.Add(go, 0);
+
 
 	InputManager::GetInstance().AddController(1);
 	auto controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadLeft,KeyState::OnPressed });
