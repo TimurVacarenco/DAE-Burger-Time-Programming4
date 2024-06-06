@@ -9,15 +9,18 @@ namespace dae
 	class PeterPepper
 	{
 	public:
-		PeterPepper(dae::Scene& scene);
+		PeterPepper(dae::Scene& scene, Vector2 loc);
 		~PeterPepper() = default;
 		PeterPepper(const PeterPepper& other) = delete;
 		PeterPepper(PeterPepper&& other) noexcept = delete;
 		PeterPepper& operator=(const PeterPepper& other) = delete;
 		PeterPepper& operator=(PeterPepper&& other) noexcept = delete;
+
+		GameObject* GetGameObject();
 	private:
-		void Initialize(dae::Scene& scene);
-		float m_Height{62};
-		float m_Width{64};
+		void Initialize(dae::Scene& scene, Vector2 loc);
+		float m_Height{32};
+		float m_Width{32};
+		GameObject* m_Peter{};
 	};
 }

@@ -8,14 +8,15 @@
 #include "ServiceLocator.h"
 #include <AnimationRenderComponent.h>
 
-dae::PeterPepper::PeterPepper(dae::Scene& scene)
+dae::PeterPepper::PeterPepper(dae::Scene& scene,Vector2 loc)
 {
-	Initialize(scene);
+	Initialize(scene,loc);
 }
 
-void dae::PeterPepper::Initialize(dae::Scene& scene)
+void dae::PeterPepper::Initialize(dae::Scene& scene,Vector2 loc)
 {
 	auto go = std::make_shared<dae::GameObject>();
+	m_Peter = go.get();
 	auto ppcomp = go->AddComponent<PepperComponent>();
 
 
@@ -26,12 +27,15 @@ void dae::PeterPepper::Initialize(dae::Scene& scene)
 	ppcomp->InitAnimation(rc);
 
 	auto col = go->AddComponent<CollisionComponent>();
-	col->SetSize(64, 64);
+	col->SetSize(32, 32);
 	go->SetTag(Tag::peter);
 	scene.Add(go, 0);
 
 
-	InputManager::GetInstance().AddController(1);
+	go->GetTransform()->SetLocalPosition(loc.x + 24, loc.y + 24, 0);
+	scene.Add(go, 0);
+
+	InputManager::GetInstance().AddController(0);
 	auto controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadLeft,KeyState::OnPressed });
 	auto command = std::make_unique<dae::MoveLeft>(go);
 	dae::InputManager::GetInstance().AddCommand(controllerkey, std::move(command));
@@ -65,4 +69,9 @@ void dae::PeterPepper::Initialize(dae::Scene& scene)
 	auto command23 = std::make_unique<dae::Idle>(go);
 	dae::InputManager::GetInstance().AddCommand(controllerkey, std::move(command23));
 
+}
+
+dae::GameObject* dae::PeterPepper::GetGameObject()
+{
+	return m_Peter;
 }

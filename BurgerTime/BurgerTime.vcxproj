@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minigin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minigin;$(SolutionDir)3rdParty\rapidjson;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -122,7 +122,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minigin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minigin;$(SolutionDir)3rdParty\rapidjson;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -137,11 +137,14 @@
   <ItemGroup>
     <ClInclude Include="BottomBun.h" />
     <ClInclude Include="Cheese.h" />
+    <ClInclude Include="EnemyComponent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="IngredientComponent.h" />
     <ClInclude Include="Ladder.h" />
     <ClInclude Include="Lettuce.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelLoader.h" />
+    <ClInclude Include="MrEgg.h" />
     <ClInclude Include="Patty.h" />
     <ClInclude Include="PepperComponent.h" />
     <ClInclude Include="PeterPepper.h" />
@@ -155,12 +158,15 @@
   <ItemGroup>
     <ClCompile Include="BottomBun.cpp" />
     <ClCompile Include="Cheese.cpp" />
+    <ClCompile Include="EnemyComponent.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="IngredientComponent.cpp" />
     <ClCompile Include="Ladder.cpp" />
     <ClCompile Include="Lettuce.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MrEgg.cpp" />
     <ClCompile Include="Patty.cpp" />
     <ClCompile Include="PepperComponent.cpp" />
     <ClCompile Include="PeterPepper.cpp" />

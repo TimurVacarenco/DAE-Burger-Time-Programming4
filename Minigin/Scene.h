@@ -1,6 +1,6 @@
 #pragma once
 #include "SceneManager.h"
-
+#include "Structs.h"
 namespace dae
 {
 	class GameObject;
@@ -17,6 +17,9 @@ namespace dae
 		void FixedUpdate(float deltaTime);
 		void Update(float deltaTime);
 		void Render() const;
+
+		void SetBounds(Rect bounds) { m_Bounds = bounds; }
+		Rect GetBounds() const { return m_Bounds; }
 
 		std::string& GetName() { return m_Name; }
 		std::vector<std::shared_ptr<GameObject>>& GetObjects() { return m_Objects; }
@@ -36,6 +39,8 @@ namespace dae
 		std::vector < std::shared_ptr<GameObject>> m_ObjectsThird{};
 		std::vector < std::shared_ptr<GameObject>> m_Objects{};
 		std::vector<GameObject*> m_ToRemove{};
+
+		Rect m_Bounds;
 
 		static unsigned int m_idCounter;
 	};

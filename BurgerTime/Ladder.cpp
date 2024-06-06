@@ -18,6 +18,8 @@ void dae::Ladder::Initialize(dae::Scene& scene, Vector2 loc)
 
 	auto col = go->AddComponent<CollisionComponent>();
 	col->SetSize(64, 64);
+	col->SetSize(48, 66);
+	col->SetOffset(8, -2);
 	go->GetTransform()->SetLocalPosition(loc.x, loc.y, 0);
 
 	go->SetTag(Tag::ladder);

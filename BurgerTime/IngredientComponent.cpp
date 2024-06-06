@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "Scene.h"
 #include "SceneManager.h"
+#include "EnemyComponent.h"
 dae::IngredientComponent::IngredientComponent(GameObject* owner)
 	:BaseComponent(owner)
 {
@@ -35,6 +36,7 @@ void dae::IngredientComponent::HandleCollision(float deltaTime)
 {
 	if (m_State == IngredientState::idle)
 	{
+		m_Enemies.clear();
 		bool onPlatform = false;
 		for (auto& obj : SceneManager::GetInstance().GetActiveScene().GetObjects())
 		{
@@ -46,6 +48,21 @@ void dae::IngredientComponent::HandleCollision(float deltaTime)
 					{
 						m_DropStates[i] = true;
 						m_Sprites[i]->SetOffsetY(5);
+					}
+					else if (obj->GetComponent<EnemyComponent>())
+					{
+						bool exists = false;
+						for (auto& enemy : m_Enemies)
+						{
+							if (enemy == obj.get())
+							{
+								exists = true;
+							}
+						}
+						if (!exists)
+						{
+							m_Enemies.push_back(obj.get());
+						}
 					}
 					else if (i == 1)
 					{
@@ -85,21 +102,34 @@ void dae::IngredientComponent::HandleCollision(float deltaTime)
 					{
 						if (!m_Collisions[1]->IsUnder(obj.get()))
 						{
-							m_Platform = nullptr;
-							m_State = IngredientState::idle;
-							m_CollidedIngredient = nullptr;
+							if(m_LevelsToFall == 0)
+							{
+								m_Platform = nullptr;
+								m_State = IngredientState::idle;
+								m_CollidedIngredient = nullptr;
+							}
+							else
+							{
+								m_Platform = obj.get();
+								--m_LevelsToFall;
+							}
 						}
 					}
 
-				if (obj.get() != m_CollidedIngredient)
 					if (auto comp = obj->GetComponent<IngredientComponent>())
 					{
 						if (comp->m_State == IngredientState::plated)
+						{
 							m_State = IngredientState::plated;
-						else {
+							for (auto& enemy : m_Enemies)
+							{
+								enemy->GetComponent<EnemyComponent>()->SetState(EnemyState::dead);
+							}
+						}
+						else 
+						{
 							m_CollidedIngredient = obj.get();
 							comp->SetState(IngredientState::falling);
-							m_State = IngredientState::idle;
 						}
 					}
 
@@ -140,6 +170,11 @@ void dae::IngredientComponent::SetState(IngredientState state)
 						m_Platform = obj.get();
 					}
 				}
+			}
+			for (int i{}; i < 4; i++)
+			{
+				m_DropStates[i] = false;
+				m_Sprites[i]->SetOffsetY(0);
 			}
 		}
 	}

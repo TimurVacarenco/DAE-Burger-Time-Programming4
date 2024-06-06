@@ -5,17 +5,17 @@
 
 bool dae::CollisionComponent::IsOverlapping(GameObject* other)
 {
-	if (GetOwner() == nullptr || GetOwner() == other )
+	if (GetOwner() == other )
 		return false;
 
 	if (auto otherCol = other->GetComponent<CollisionComponent>())
 	{
-		auto pos = GetOwner()->GetTransform()->GetWorldPosition();
+		auto pos = GetOwner()->GetTransform()->GetLocalPosition();
 		pos.x += m_OffsetX;
 		pos.y += m_OffsetY;
 		glm::vec3 cornerpos{ pos.x + m_Width,pos.y + m_Height,pos.z };
 
-		auto otherPos = other->GetTransform()->GetWorldPosition();
+		auto otherPos = other->GetTransform()->GetLocalPosition();
 		otherPos.x += otherCol->m_OffsetX;
 		otherPos.y += otherCol->m_OffsetY;
 		glm::vec3 otherCorner{ otherPos.x + otherCol->m_Width,otherPos.y + otherCol->m_Height,otherPos.z };
@@ -36,7 +36,7 @@ bool dae::CollisionComponent::IsOverlapping(GameObject* other)
 
 bool dae::CollisionComponent::IsOverlapping(Rect other)
 {
-	auto pos = GetOwner()->GetTransform()->GetWorldPosition();
+	auto pos = GetOwner()->GetTransform()->GetLocalPosition();
 	pos.x += m_OffsetX;
 	pos.y += m_OffsetY;
 	glm::vec3 cornerPos{ pos.x + m_Width,pos.y + m_Height,pos.z };

@@ -23,12 +23,19 @@ namespace dae{
 		void HandleCollision(float deltaTime);
 		
 		IngredientState m_State = IngredientState::idle;
+		
 		std::vector<CollisionComponent*> m_Collisions{};
 		std::vector<RenderComponent*> m_Sprites{};
+		std::vector<GameObject*> m_Enemies;
+
 		bool m_DropStates[4]{ false,false,false,false };
-		float m_FallSpeed{ 200.f };
-		GameObject* m_CollidedIngredient{ nullptr },
-			* m_Platform{ nullptr };
+		
+		float m_FallSpeed{ 100.f };
+		
+		GameObject* m_CollidedIngredient{ nullptr };
+		GameObject* m_Platform{ nullptr };
+
+		int m_LevelsToFall{};
 	};
 
 }
