@@ -9,4 +9,6 @@ My main design choices are:
 7) Singleton pattern
 8) State pattern
 
+For some reason build in x64 folder is not working, even though Building from visual studio works fine
+
 Link: https://github.com/TimurVacarenco/DAE-Burger-Time-Programming4
