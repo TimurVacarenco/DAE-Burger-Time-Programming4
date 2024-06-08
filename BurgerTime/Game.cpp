@@ -1,10 +1,18 @@
 #include "Game.h"
 
-#include "SceneManager.h"
-#include "Level.h"
+#include "GameInstance.h"
+#include "MenuScreen.h"
+#include "NextScreen.h"
 
 void Game::LoadGame()
 {
-	auto& scene = dae::SceneManager::GetInstance().CreateScene("Level1");
-	dae::Level level{ scene };
+	GameInstance::GetInstance().StartGame();
+	MenuScreen{};
+}
+
+
+void Game::Cleanup()
+{
+	GameInstance::GetInstance().EndGame();
+	Minigin::Cleanup();
 }

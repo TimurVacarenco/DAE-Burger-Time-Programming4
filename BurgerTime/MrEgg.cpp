@@ -1,10 +1,15 @@
 #include "MrEgg.h"
-#include <CollisionComponent.h>
-#include <AnimationRenderComponent.h>
-#include "EnemyComponent.h"
-#include "GameObject.h"
-#include <Scene.h>
 
+#include "AnimationRenderComponent.h"
+#include "CollisionComponent.h"
+#include "EnemyComponent.h"
+#include "RenderComponent.h"
+#include "GameObject.h"
+#include "Input.h"
+#include "InputManager.h"
+#include "Scene.h"
+#include "ServiceLocator.h"
+#include "EnumClasses.h"
 
 dae::MrEgg::MrEgg(dae::Scene& scene, Vector2 loc, GameObject* peter)
 {
@@ -14,6 +19,10 @@ dae::MrEgg::MrEgg(dae::Scene& scene, Vector2 loc, GameObject* peter)
 void dae::MrEgg::Initialize(dae::Scene& scene, Vector2 loc, GameObject* peter)
 {
 	auto go = std::make_shared<dae::GameObject>();
+
+	auto col = go->AddComponent<CollisionComponent>();
+	col->SetSize(32, 32);
+
 	auto enemycomp = go->AddComponent<EnemyComponent>();
 	enemycomp->SetPeter(peter);
 
@@ -22,11 +31,10 @@ void dae::MrEgg::Initialize(dae::Scene& scene, Vector2 loc, GameObject* peter)
 	rc->SetSpriteDimensions(16, 16);
 	enemycomp->InitAnimation(rc, "\\Sprites\\Enemies\\egg.png");
 
-	auto col = go->AddComponent<CollisionComponent>();
-	col->SetSize(32, 32);
+
 
 	go->SetTag(Tag::egg);
 
-	go->GetTransform()->SetLocalPosition(loc.x + 16, loc.y + 16, 0);
-	scene.Add(go, 0);
+	go->GetTransform()->SetLocalPosition(loc.x, loc.y, 0);
+	scene.Add(go);
 }

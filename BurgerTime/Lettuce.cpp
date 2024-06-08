@@ -1,15 +1,18 @@
 #include "Lettuce.h"
+
 #include "CollisionComponent.h"
 #include "RenderComponent.h"
 #include "GameObject.h"
 #include "IngredientComponent.h"
 #include "Input.h"
 #include "Scene.h"
+#include "EnumClasses.h"
 
 dae::Lettuce::Lettuce(dae::Scene& scene, Vector2 loc)
 {
 	Initialize(scene, loc);
 }
+
 void dae::Lettuce::Initialize(dae::Scene& scene, Vector2 loc)
 {
 	std::vector<RenderComponent*> sprites;
@@ -46,25 +49,26 @@ void dae::Lettuce::Initialize(dae::Scene& scene, Vector2 loc)
 
 	//COLLISION
 	auto col = go->AddComponent<CollisionComponent>();
-	col->SetSize(16, 14);
+	col->SetSize(8, 14);
+	col->SetOffset(4, 0);
 
 	cols.push_back(col);
 
 	col = go->AddComponent<CollisionComponent>();
-	col->SetSize(16, 14);
-	col->SetOffset(16, 0);
+	col->SetSize(8, 14);
+	col->SetOffset(20, 0);
 
 	cols.push_back(col);
 
 	col = go->AddComponent<CollisionComponent>();
-	col->SetSize(16, 14);
-	col->SetOffset(32, 0);
+	col->SetSize(8, 14);
+	col->SetOffset(36, 0);
 
 	cols.push_back(col);
 
 	col = go->AddComponent<CollisionComponent>();
-	col->SetSize(16, 14);
-	col->SetOffset(48, 0);
+	col->SetSize(8, 14);
+	col->SetOffset(52, 0);
 
 	cols.push_back(col);
 
@@ -72,8 +76,8 @@ void dae::Lettuce::Initialize(dae::Scene& scene, Vector2 loc)
 	ingredient->SetCollisions(cols);
 	ingredient->SetSprites(sprites);
 
-	go->GetTransform()->SetLocalPosition(loc.x, loc.y + 44, 0);
+	go->GetTransform()->SetLocalPosition(loc.x, loc.y + 54, 0);
 	go->SetTag(Tag::lettuce);
-	scene.Add(go, 1);
+	scene.Add(go);
 
 }

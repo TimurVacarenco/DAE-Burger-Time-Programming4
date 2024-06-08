@@ -15,8 +15,6 @@ void dae::AnimationRenderComponent::Render() const
 		Rect dst{ pos.x,pos.y,m_Width,m_Height };
 		Renderer::GetInstance().RenderTexture(*m_Texture, dst, m_Rect);
 	}
-
-
 }
 
 void dae::AnimationRenderComponent::Update(float deltaTime)

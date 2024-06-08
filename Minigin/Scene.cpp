@@ -1,7 +1,6 @@
 #include "Scene.h"
 
 #include "GameObject.h"
-#include "AnimationRenderComponent.h"
 
 using namespace dae;
 
@@ -14,17 +13,6 @@ Scene::~Scene() = default;
 void Scene::Add(std::shared_ptr<GameObject> object)
 {
 	m_Objects.emplace_back(std::move(object));
-}
-
-void Scene::Add(const std::shared_ptr<GameObject>& object, int renderLayer)
-{
-	if (renderLayer == 0)
-		m_ObjectsFirst.push_back(object);
-	if (renderLayer == 1)
-		m_ObjectsSecond.push_back(object);
-	if (renderLayer >= 2)
-		m_ObjectsThird.push_back(object);
-	m_Objects.push_back(object);
 }
 
 void Scene::Remove(GameObject* object)
@@ -57,31 +45,9 @@ void Scene::Update(float deltaTime)
 
 void Scene::Render() const
 {
-	for (const auto& object : m_ObjectsThird)
+	for (int i{}; i < (int)m_Objects.size(); ++i)
 	{
-		for (auto render : object->GetComponents<RenderComponent>())
-		{
-			render->Render();
-		}
-
-	}
-
-	for (const auto& object : m_ObjectsSecond)
-	{
-		for (auto render : object->GetComponents<RenderComponent>())
-		{
-			render->Render();
-		}
-
-	}
-
-	for (const auto& object : m_ObjectsFirst)
-	{
-		for (auto render : object->GetComponents<AnimationRenderComponent>())
-		{
-			render->Render();
-		}
-
+		m_Objects[i]->Render();
 	}
 }
 

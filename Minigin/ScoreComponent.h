@@ -10,7 +10,7 @@ namespace dae
         ScoreComponent(GameObject* owner) : BaseComponent(owner) {}
         void Update(float) override {}
         void FixedUpdate(float) override {}
-        void AddPoints(int pointsAmt) { m_Points += pointsAmt; Notify(GetOwner(), Event::ADDED_POINTS); }
+        void AddPoints(int pointsAmt) { m_Points += pointsAmt; Notify(GetOwner(), Event::ADDED_SCORE); }
         int GetPoints() { return m_Points; }
     private:
         int m_Points{};

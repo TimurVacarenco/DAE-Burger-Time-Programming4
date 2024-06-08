@@ -10,8 +10,8 @@ namespace dae {
 		BaseComponent& operator=(const BaseComponent& other) = delete;
 		BaseComponent& operator=(BaseComponent&& other) noexcept = delete;
 
-		virtual void FixedUpdate(float);
-		virtual void Update(float deltaTime);
+		virtual void FixedUpdate(float deltaTime) = 0;
+		virtual void Update(float deltaTime) = 0;
 	private:
 		GameObject* m_Owner;
 	protected:

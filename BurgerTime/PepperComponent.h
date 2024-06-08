@@ -1,39 +1,31 @@
 #pragma once
-#include "BaseComponent.h"
-#include "TransformComponent.h"
-#include "EnumClasses.h"
-#include "SceneManager.h"
-#include "CollisionComponent.h"
-#include "Scene.h"
+#include "RenderComponent.h"
+#include "Subject.h"
 
 namespace dae {
-    class AnimationRenderComponent;
-    class PepperComponent : public BaseComponent
-    {
-    public:
-        PepperComponent(GameObject* owner);
-        void Update(float deltaTime) override;
-        void FixedUpdate(float) override {}
-        void SetState(CharacterState state) { m_State = state; }
-        void InitAnimation(AnimationRenderComponent* comp);
-    private:
-        void HandleMovement(float deltaTime);
-        void HandleCollision(float deltaTime);
-        void HandleAnim();
-        CharacterState m_State = CharacterState::idle;
-        float m_Speed = 80.f;
-        float m_LadderSpeed = 100.f;
+	class GameObject;
 
-        AnimationRenderComponent* m_Anim{};
+	class PepperComponent : public BaseComponent, public Subject
+	{
+	public:
+		PepperComponent(GameObject* owner);
+		void Update(float)override;
+		void FixedUpdate(float) override {}
+		void Activate();
+		int GetAmt()const { return m_Amt; }
+	private:
+		void Initialize();
 
-        int m_Idle{},
-            m_RunLeft{},
-            m_RunRight{},
-            m_Climb{},
-            m_ClimbDown{};
+		GameObject* m_Peter{};
 
-        bool m_OnPlatform{ false },
-            m_OnLadder{ false },
-            m_Colliding{ false };
-    };
+		dae::RenderComponent* m_RenderComp{};
+		
+		bool m_Active{ false };
+
+		float m_TimeToShow{ .5f };
+		float m_ElapsedTime{};
+
+		int m_Amt{ 5 };
+		int m_Sound{};
+	};
 }

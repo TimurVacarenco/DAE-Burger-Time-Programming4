@@ -29,6 +29,6 @@ void dae::Platform::Initialize(dae::Scene& scene, Vector2 loc)
 
 
 	go->SetTag(Tag::platform);
-	scene.Add(go, 1);
+	scene.Add(go);
 
 }

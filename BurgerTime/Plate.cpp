@@ -16,13 +16,10 @@ void dae::Plate::Initialize(dae::Scene& scene, Vector2 loc)
 {
 	auto go = std::make_shared<dae::GameObject>();
 
-	//SPRITES
 	auto rc = go->AddComponent<dae::RenderComponent>();
 	rc->SetTexture("\\Sprites\\World\\plate.png");
 	rc->SetDimensions(64, 7);
 
-
-	//COLLISION
 	auto col = go->AddComponent<CollisionComponent>();
 	col->SetSize(64, 7);
 

@@ -1,73 +1,141 @@
 #include "PeterPepper.h"
 
+#include "AnimationRenderComponent.h"
+#include "CollisionComponent.h"
+#include "GameInstance.h"
 #include "RenderComponent.h"
 #include "GameObject.h"
 #include "Input.h"
 #include "InputManager.h"
+#include "PepperComponent.h"
+#include "ScoreComponent.h"
 #include "Scene.h"
-#include "ServiceLocator.h"
-#include <AnimationRenderComponent.h>
+#include "EnumClasses.h"
 
-dae::PeterPepper::PeterPepper(dae::Scene& scene,Vector2 loc)
+dae::PeterPepper::PeterPepper(dae::Scene& scene, Vector2 loc, bool keyboardControls)
 {
-	Initialize(scene,loc);
+	Initialize(scene, loc, keyboardControls);
 }
 
-void dae::PeterPepper::Initialize(dae::Scene& scene,Vector2 loc)
+void dae::PeterPepper::Initialize(dae::Scene& scene, Vector2 loc, bool keyboardControls)
 {
 	auto go = std::make_shared<dae::GameObject>();
 	m_Peter = go.get();
-	auto ppcomp = go->AddComponent<PepperComponent>();
+	go->SetTag(Tag::peter);
+	go->AddComponent<dae::HealthComponent>();
+	go->AddComponent<PepperComponent>();
 
+	go->AddComponent<dae::CollisionComponent>()->SetSize(32, 32);
 
 	auto rc = go->AddComponent<dae::AnimationRenderComponent>();
 	rc->SetTexture("\\Sprites\\PeterPepper\\sprites.png");
 	rc->SetDimensions(m_Height, m_Width);
 	rc->SetSpriteDimensions(16, 16);
-	ppcomp->InitAnimation(rc);
 
-	auto col = go->AddComponent<CollisionComponent>();
-	col->SetSize(32, 32);
-	go->SetTag(Tag::peter);
-	scene.Add(go, 0);
+	go->AddComponent<dae::PeterPepperComponent>()->InitAnimation(rc);
+	go->GetTransform()->SetLocalPosition(loc.x, loc.y, 0);
 
+	go->AddComponent<ScoreComponent>()->AddPoints(GameInstance::GetInstance().GetScore());
 
-	go->GetTransform()->SetLocalPosition(loc.x + 24, loc.y + 24, 0);
-	scene.Add(go, 0);
+	scene.Add(go);
 
-	InputManager::GetInstance().AddController(0);
-	auto controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadLeft,KeyState::OnPressed });
-	auto command = std::make_unique<dae::MoveLeft>(go);
-	dae::InputManager::GetInstance().AddCommand(controllerkey, std::move(command));
+	if (keyboardControls)
+	{
 
-	controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadLeft,KeyState::OnReleased });
-	auto command2 = std::make_unique<dae::Idle>(go);
-	dae::InputManager::GetInstance().AddCommand(controllerkey, std::move(command2));
+		auto keyBoardKey = Input::KeyCommand(SDL_SCANCODE_LEFT, KeyState::OnPressed);
+		auto controllerkey = Input::ControllerKey({ 0,::ControllerButton::DpadLeft,KeyState::OnPressed });
+		auto command = std::make_shared<dae::MoveLeft>(go);
+		dae::InputManager::GetInstance().AddCommand(controllerkey, command);
+		dae::InputManager::GetInstance().AddCommand(keyBoardKey, command);
 
+		keyBoardKey = Input::KeyCommand(SDL_SCANCODE_LEFT,KeyState::OnReleased);
+		controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadLeft,KeyState::OnReleased });
+		auto idlecommand = std::make_shared<dae::Idle>(go);
+		dae::InputManager::GetInstance().AddCommand(controllerkey, idlecommand);
+		dae::InputManager::GetInstance().AddCommand(keyBoardKey, idlecommand);
 
-	controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadRight,KeyState::OnPressed });
-	auto command3 = std::make_unique<dae::MoveRight>(go);
-	dae::InputManager::GetInstance().AddCommand(controllerkey, std::move(command3));
+		//RIGHT
 
-	controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadRight,KeyState::OnReleased });
-	auto command21 = std::make_unique<dae::Idle>(go);
-	dae::InputManager::GetInstance().AddCommand(controllerkey, std::move(command21));
+		keyBoardKey = Input::KeyCommand(SDL_SCANCODE_RIGHT,KeyState::OnPressed);
+		controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadRight,KeyState::OnPressed });
+		auto command2 = std::make_shared<dae::MoveRight>(go);
+		dae::InputManager::GetInstance().AddCommand(controllerkey, command2);
+		dae::InputManager::GetInstance().AddCommand(keyBoardKey, command2);
 
-	controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadUp,KeyState::OnPressed });
-	auto command4 = std::make_unique<dae::MoveUp>(go);
-	dae::InputManager::GetInstance().AddCommand(controllerkey, std::move(command4));
+		keyBoardKey = Input::KeyCommand(SDL_SCANCODE_RIGHT, KeyState::OnReleased);
+		controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadRight,KeyState::OnReleased });
+		dae::InputManager::GetInstance().AddCommand(controllerkey, idlecommand);
+		dae::InputManager::GetInstance().AddCommand(keyBoardKey, idlecommand);
 
-	controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadUp,KeyState::OnReleased });
-	auto command22 = std::make_unique<dae::Idle>(go);
-	dae::InputManager::GetInstance().AddCommand(controllerkey, std::move(command22));
+		//UP
+		keyBoardKey = Input::KeyCommand(SDL_SCANCODE_UP, KeyState::OnPressed);
+		controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadUp,KeyState::OnPressed });
+		auto command3 = std::make_shared<dae::MoveUp>(go);
+		dae::InputManager::GetInstance().AddCommand(controllerkey, command3);
+		dae::InputManager::GetInstance().AddCommand(keyBoardKey, command3);
 
-	controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadDown,KeyState::OnPressed });
-	auto command5 = std::make_unique<dae::MoveDown>(go);
-	dae::InputManager::GetInstance().AddCommand(controllerkey, std::move(command5));
+		keyBoardKey = Input::KeyCommand(SDL_SCANCODE_UP,KeyState::OnReleased);
+		controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadUp,KeyState::OnReleased });
+		dae::InputManager::GetInstance().AddCommand(controllerkey, idlecommand);
+		dae::InputManager::GetInstance().AddCommand(keyBoardKey, idlecommand);
 
-	controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadDown,KeyState::OnReleased });
-	auto command23 = std::make_unique<dae::Idle>(go);
-	dae::InputManager::GetInstance().AddCommand(controllerkey, std::move(command23));
+		//DOWN
+		keyBoardKey = Input::KeyCommand(SDL_SCANCODE_DOWN, KeyState::OnPressed);
+		controllerkey = Input::ControllerKey({ 0,ControllerButton::DpadDown,KeyState::OnPressed });
+		auto command4 = std::make_shared<dae::MoveDown>(go);
+		dae::InputManager::GetInstance().AddCommand(controllerkey, command4);
+		dae::InputManager::GetInstance().AddCommand(keyBoardKey, command4);
+
+		keyBoardKey = Input::KeyCommand(SDL_SCANCODE_DOWN,KeyState::OnReleased);
+		controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadDown,KeyState::OnReleased });
+		dae::InputManager::GetInstance().AddCommand(controllerkey, idlecommand);
+		dae::InputManager::GetInstance().AddCommand(keyBoardKey, idlecommand);
+
+		//PEPPER
+		keyBoardKey = Input::KeyCommand(SDL_SCANCODE_SPACE, KeyState::OnPressed);
+		controllerkey = Input::ControllerKey({ 0, ControllerButton::ButtonA,KeyState::OnPressed });
+		auto command5 = std::make_shared<dae::Pepper>(go);
+		dae::InputManager::GetInstance().AddCommand(controllerkey, command5);
+		dae::InputManager::GetInstance().AddCommand(keyBoardKey, command5);
+	}
+	else
+	{
+		auto controllerkey = Input::ControllerKey({ 0,ControllerButton::DpadLeft,KeyState::OnPressed });
+		auto command = std::make_shared<dae::MoveLeft>(go);
+		dae::InputManager::GetInstance().AddCommand(controllerkey, command);
+
+		controllerkey = Input::ControllerKey({ 0,ControllerButton::DpadLeft,KeyState::OnReleased });
+		auto idlecommand = std::make_shared<dae::Idle>(go);
+		dae::InputManager::GetInstance().AddCommand(controllerkey, idlecommand);
+
+		//RIGHT
+		controllerkey = Input::ControllerKey({ 0,ControllerButton::DpadRight,KeyState::OnPressed });
+		auto command2 = std::make_shared<dae::MoveRight>(go);
+		dae::InputManager::GetInstance().AddCommand(controllerkey, command2);
+
+		controllerkey = Input::ControllerKey({ 0,ControllerButton::DpadRight,KeyState::OnReleased });
+		dae::InputManager::GetInstance().AddCommand(controllerkey, idlecommand);
+
+		//UP
+		controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadUp,KeyState::OnPressed });
+		auto command3 = std::make_shared<dae::MoveUp>(go);
+		dae::InputManager::GetInstance().AddCommand(controllerkey, command3);
+
+		controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadUp,KeyState::OnReleased });
+		dae::InputManager::GetInstance().AddCommand(controllerkey, idlecommand);
+
+		//DOWN
+		controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadDown,KeyState::OnPressed });
+		auto command4 = std::make_shared<dae::MoveDown>(go);
+		dae::InputManager::GetInstance().AddCommand(controllerkey, command4);
+
+		controllerkey = Input::ControllerKey({ 0, ControllerButton::DpadDown,KeyState::OnReleased });
+		dae::InputManager::GetInstance().AddCommand(controllerkey, idlecommand);
+
+		controllerkey = Input::ControllerKey({ 0, ControllerButton::ButtonA,KeyState::OnPressed });
+		auto command5 = std::make_shared<dae::Pepper>(go);
+		dae::InputManager::GetInstance().AddCommand(controllerkey, command5);
+	}
 
 }
 
@@ -75,3 +143,4 @@ dae::GameObject* dae::PeterPepper::GetGameObject()
 {
 	return m_Peter;
 }
+

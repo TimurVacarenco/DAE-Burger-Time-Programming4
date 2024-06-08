@@ -40,7 +40,6 @@ bool dae::CollisionComponent::IsOverlapping(Rect other)
 	pos.x += m_OffsetX;
 	pos.y += m_OffsetY;
 	glm::vec3 cornerPos{ pos.x + m_Width,pos.y + m_Height,pos.z };
-
 	glm::vec3 otherPos = { other.x,other.y,0 };
 	glm::vec3 otherCorner = { other.x + other.width,other.y + other.height,0 };
 

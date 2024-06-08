@@ -5,26 +5,18 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Misc">
       <UniqueIdentifier>{94dc3898-2e7a-48a3-aa6f-aa3d414b89af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Prefabs">
-      <UniqueIdentifier>{82bedf73-ee15-48a2-81f0-4b1eb84a134e}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameComponents">
       <UniqueIdentifier>{4e0275d9-018b-4cbc-8ebf-b41c9a64900e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Screens">
+      <UniqueIdentifier>{df704e24-55c4-4513-b514-f3266a240197}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PepperComponent.h">
+    <ClInclude Include="PeterPepperComponent.h">
       <Filter>GameComponents</Filter>
     </ClInclude>
     <ClInclude Include="PeterPepper.h">
@@ -46,12 +38,6 @@
       <Filter>GameComponents</Filter>
     </ClInclude>
     <ClInclude Include="TopBun.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="Wall.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Lettuce.h">
@@ -79,11 +65,62 @@
       <Filter>Misc</Filter>
     </ClInclude>
     <ClInclude Include="MrEgg.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LadderComponent.h">
+      <Filter>GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameInstance.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="NextScreen.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="TransitionComponent.h">
+      <Filter>GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeLostScreen.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathScreen.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuScreen.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuComponent.h">
+      <Filter>GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpawnComponent.h">
+      <Filter>GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="MrPickle.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MrHotDog.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpawner.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="PepperComponent.h">
+      <Filter>GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHotDogComponent.h">
+      <Filter>GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHotDog.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PepperDisplayComponent.h">
+      <Filter>GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="PeterPepperJr.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PepperComponent.cpp">
+    <ClCompile Include="PeterPepperComponent.cpp">
       <Filter>GameComponents</Filter>
     </ClCompile>
     <ClCompile Include="PeterPepper.cpp">
@@ -101,9 +138,6 @@
     <ClCompile Include="Platform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Wall.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BottomBun.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -118,9 +152,6 @@
     </ClCompile>
     <ClCompile Include="Lettuce.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Misc</Filter>
     </ClCompile>
     <ClCompile Include="Patty.cpp">
       <Filter>Source Files</Filter>
@@ -141,6 +172,57 @@
       <Filter>Misc</Filter>
     </ClCompile>
     <ClCompile Include="MrEgg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LadderComponent.cpp">
+      <Filter>GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="GameInstance.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="NextScreen.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="TransitionComponent.cpp">
+      <Filter>GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeLostScreen.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuScreen.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathScreen.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuComponent.cpp">
+      <Filter>GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="MrPickle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySpawnComponent.cpp">
+      <Filter>GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="MrHotDog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySpawner.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="PepperComponent.cpp">
+      <Filter>GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHotDogComponent.cpp">
+      <Filter>GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHotDog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PepperDisplayComponent.cpp">
+      <Filter>GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="PeterPepperJr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

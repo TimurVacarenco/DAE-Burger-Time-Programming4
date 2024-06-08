@@ -3,16 +3,19 @@
 #include "GameObject.h"
 #include "HealthComponent.h"
 #include "ScoreComponent.h"
-#include "../BurgerTime/PepperComponent.h" 
-
+#include "../BurgerTime/PeterPepperComponent.h" 
+#include "../BurgerTime/PeterPepper.h"
+#include "../BurgerTime/MenuComponent.h"
+#include "../BurgerTime/PlayerHotDogComponent.h"
+#include "../BurgerTime/PepperComponent.h"
+#include "../BurgerTime/GameInstance.h"
 namespace dae
 {
-	//class PepperComponent;
+	class MenuComponent;
 	class BaseCommand
 	{
 	public:
 		BaseCommand(std::shared_ptr<GameObject> obj):m_pActor{ obj } {}
-		virtual void SetActor(std::shared_ptr<GameObject> pGameObject) { m_pActor = pGameObject; };
 		virtual ~BaseCommand() = default;
 		virtual void Execute() = 0;
 		const std::shared_ptr<GameObject> GetActor() { return m_pActor; }
@@ -20,7 +23,7 @@ namespace dae
 		std::shared_ptr<GameObject> m_pActor;
 	};
 
-
+#pragma region TestCommands
 	class KillCommand : public BaseCommand
 	{
 	public:
@@ -34,14 +37,15 @@ namespace dae
 		AddPointsCommand(std::shared_ptr<GameObject> obj) :BaseCommand(obj) {}
 		void Execute() override { GetActor()->GetComponent<ScoreComponent>()->AddPoints(100); }
 	};
-
+#pragma endregion
+#pragma region PeterPepper
 	class MoveLeft :public BaseCommand
 	{
 	public:
 		MoveLeft(std::shared_ptr<GameObject> obj) : BaseCommand(obj) {}
 		void Execute() override
 		{
-			GetActor()->GetComponent<PepperComponent>()->SetState(CharacterState::left);
+			GetActor()->GetComponent<PeterPepperComponent>()->SetState(CharacterState::left);
 		}
 	};
 
@@ -51,7 +55,7 @@ namespace dae
 		MoveRight(std::shared_ptr<GameObject> obj) : BaseCommand(obj) {}
 		void Execute() override
 		{
-			GetActor()->GetComponent<PepperComponent>()->SetState(CharacterState::right);
+			GetActor()->GetComponent<PeterPepperComponent>()->SetState(CharacterState::right);
 		}
 	};
 
@@ -61,7 +65,7 @@ namespace dae
 		MoveUp(std::shared_ptr<GameObject> obj) : BaseCommand(obj) {}
 		void Execute() override
 		{
-			GetActor()->GetComponent<PepperComponent>()->SetState(CharacterState::up);
+			GetActor()->GetComponent<PeterPepperComponent>()->SetState(CharacterState::up);
 		}
 	};
 
@@ -71,7 +75,7 @@ namespace dae
 		MoveDown(std::shared_ptr<GameObject> obj) : BaseCommand(obj) {}
 		void Execute() override
 		{
-			GetActor()->GetComponent<PepperComponent>()->SetState(CharacterState::down);
+			GetActor()->GetComponent<PeterPepperComponent>()->SetState(CharacterState::down);
 		}
 	};
 
@@ -81,8 +85,77 @@ namespace dae
 		Idle(std::shared_ptr<GameObject> obj) : BaseCommand(obj) {}
 		void Execute() override
 		{
-			GetActor()->GetComponent<PepperComponent>()->SetState(CharacterState::idle);
+			GetActor()->GetComponent<PeterPepperComponent>()->SetState(CharacterState::idle);
 		}
 	};
 
+	class Pepper : public BaseCommand
+	{
+	public:
+		Pepper(std::shared_ptr<GameObject> obj) : BaseCommand(obj) {}
+		void Execute() override 
+		{
+			GetActor()->GetComponent<PepperComponent>()->Activate(); 
+		}
+	};
+
+#pragma endregion
+#pragma region Menu
+	class MenuNext : public BaseCommand
+	{
+	public:
+		MenuNext(std::shared_ptr<GameObject> obj) : BaseCommand(obj) {}
+		void Execute() override { GetActor()->GetComponent<MenuComponent>()->NextSelection(); }
+	};
+
+	class MenuPrevious : public BaseCommand
+	{
+	public:
+		MenuPrevious(std::shared_ptr<GameObject> obj) : BaseCommand(obj) {}
+		void Execute() override { GetActor()->GetComponent<MenuComponent>()->PreviousSelection(); }
+	};
+
+	class MenuStart : public BaseCommand
+	{
+	public:
+		MenuStart(std::shared_ptr<GameObject> obj) : BaseCommand(obj) {}
+		void Execute() override { GetActor()->GetComponent<MenuComponent>()->Start(); }
+	};
+#pragma endregion
+#pragma region HotDogPlayer
+	class HotDogIdle : public BaseCommand
+	{
+	public:
+		HotDogIdle(std::shared_ptr<GameObject> obj) : BaseCommand(obj) {}
+		void Execute() override { GetActor()->GetComponent<PlayerHotDogComponent>()->SetState(PlayerHotDogState::idle); }
+	};
+
+	class HotDogMoveLeft : public BaseCommand
+	{
+	public:
+		HotDogMoveLeft(std::shared_ptr<GameObject> obj) : BaseCommand(obj) {}
+		void Execute() override { GetActor()->GetComponent<PlayerHotDogComponent>()->SetState(PlayerHotDogState::left); }
+	};
+
+	class HotDogMoveRight : public BaseCommand
+	{
+	public:
+		HotDogMoveRight(std::shared_ptr<GameObject> obj) : BaseCommand(obj) {}
+		void Execute() override { GetActor()->GetComponent<PlayerHotDogComponent>()->SetState(PlayerHotDogState::right); }
+	};
+
+	class HotDogMoveUp : public BaseCommand
+	{
+	public:
+		HotDogMoveUp(std::shared_ptr<GameObject> obj) : BaseCommand(obj) {}
+		void Execute() override { GetActor()->GetComponent<PlayerHotDogComponent>()->SetState(PlayerHotDogState::up); }
+	};
+
+	class HotDogMoveDown : public BaseCommand
+	{
+	public:
+		HotDogMoveDown(std::shared_ptr<GameObject> obj) : BaseCommand(obj) {}
+		void Execute() override { GetActor()->GetComponent<PlayerHotDogComponent>()->SetState(PlayerHotDogState::down); }
+	};
+#pragma endregion
 }

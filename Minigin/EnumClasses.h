@@ -4,7 +4,7 @@ enum class Event
 {
 	ON_HIT,
 	ON_DEATH,
-	ADDED_POINTS,
+	ADDED_SCORE,
 	ON_PEPPER
 };
 #pragma endregion

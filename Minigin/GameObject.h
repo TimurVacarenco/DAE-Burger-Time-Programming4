@@ -28,7 +28,7 @@ namespace dae
 
 
 		GameObject* GetParent();
-		void SetParent(GameObject* parent, bool keepWorldPos);
+		void SetParent(GameObject* parent, bool keepWorldPos = false);
 		void AddChild(GameObject* child);
 		void RemoveChild(GameObject* child);
 

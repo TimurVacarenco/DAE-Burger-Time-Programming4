@@ -1,9 +1,12 @@
 #include "Ladder.h"
-#include <GameObject.h>
-#include <RenderComponent.h>
-#include <CollisionComponent.h>
-#include <EnumClasses.h>
-#include <Scene.h>
+
+#include "CollisionComponent.h"
+#include "RenderComponent.h"
+#include "GameObject.h"
+#include "LadderComponent.h"
+#include "Scene.h"
+#include "EnumClasses.h"
+
 dae::Ladder::Ladder(dae::Scene& scene, Vector2 loc)
 {
 	Initialize(scene, loc);
@@ -14,15 +17,15 @@ void dae::Ladder::Initialize(dae::Scene& scene, Vector2 loc)
 	auto go = std::make_shared<dae::GameObject>();
 	auto rc = go->AddComponent<dae::RenderComponent>();
 	rc->SetTexture("\\Sprites\\World\\ladder.png");
-	rc->SetDimensions(64, 64);
+	rc->SetDimensions(32, 64);
 
 	auto col = go->AddComponent<CollisionComponent>();
-	col->SetSize(64, 64);
-	col->SetSize(48, 66);
-	col->SetOffset(8, -2);
-	go->GetTransform()->SetLocalPosition(loc.x, loc.y, 0);
+	col->SetSize(32, 64);
+	go->GetTransform()->SetLocalPosition(loc.x + 16, loc.y, 0);
+
+	go->AddComponent<LadderComponent>();
 
 	go->SetTag(Tag::ladder);
-	scene.Add(go,2);
+	scene.Add(go);
 
 }
